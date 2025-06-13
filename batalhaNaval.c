@@ -1,48 +1,47 @@
 #include <stdio.h>
 
 int main() {
-    // Matriz 5x5 simulando o tabuleiro
-    int tabuleiro[5][5] = {0};
+    // Tabuleiro 10x10 inicializado com zeros
+    int tabuleiro[10][10] = {0};
 
-    // Posição inicial dos navios
-    int linha_navio_vertical = 0;
-    int coluna_navio_vertical = 2;
+    // Tamanho padrão dos navios
+    int tamanho = 4;
 
-    int linha_navio_horizontal = 3;
-    int coluna_navio_horizontal = 1;
-
-    // Tamanho dos navios (3 casas)
-    int tamanho_navio = 3;
-
-    // Posiciona navio vertical
-    for (int i = 0; i < tamanho_navio; i++) {
-        tabuleiro[linha_navio_vertical + i][coluna_navio_vertical] = 1;
+    // 1. Navio Horizontal na linha 2
+    int linhaH = 2;
+    int colunaH = 3;
+    for (int i = 0; i < tamanho; i++) {
+        tabuleiro[linhaH][colunaH + i] = 3;
     }
 
-    // Posiciona navio horizontal
-    for (int i = 0; i < tamanho_navio; i++) {
-        tabuleiro[linha_navio_horizontal][coluna_navio_horizontal + i] = 2;
+    // 2. Navio Vertical na coluna 5
+    int linhaV = 4;
+    int colunaV = 5;
+    for (int i = 0; i < tamanho; i++) {
+        tabuleiro[linhaV + i][colunaV] = 3;
     }
 
-    // Exibe as coordenadas dos navios
-    printf("=== Coordenadas dos Navios ===\n");
+    // 3. Navio Diagonal Principal (↘)
+    int linhaD1 = 0;
+    int colunaD1 = 0;
+    for (int i = 0; i < tamanho; i++) {
+        tabuleiro[linhaD1 + i][colunaD1 + i] = 3;
+    }
 
-    printf("\nNavio Vertical (código 1):\n");
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (tabuleiro[i][j] == 1) {
-                printf("(%d, %d)\n", i, j);
-            }
+    // 4. Navio Diagonal Secundária (↙)
+    int linhaD2 = 0;
+    int colunaD2 = 9;
+    for (int i = 0; i < tamanho; i++) {
+        tabuleiro[linhaD2 + i][colunaD2 - i] = 3;
+    }
+
+    // Exibir tabuleiro completo
+    printf("=== TABULEIRO 10x10 ===\n");
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", tabuleiro[i][j]);
         }
-    }
-
-    printf("\nNavio Horizontal (código 2):\n");
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (tabuleiro[i][j] == 2) {
-                printf("(%d, %d)\n", i, j);
-            }
-        }
+        printf("\n");
     }
 
     return 0;
