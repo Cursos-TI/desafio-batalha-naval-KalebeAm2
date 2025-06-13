@@ -1,48 +1,47 @@
 #include <stdio.h>
 
-int main() {
-    // Tabuleiro 10x10 inicializado com zeros
-    int tabuleiro[10][10] = {0};
-
-    // Tamanho padrão dos navios
-    int tamanho = 4;
-
-    // 1. Navio Horizontal na linha 2
-    int linhaH = 2;
-    int colunaH = 3;
-    for (int i = 0; i < tamanho; i++) {
-        tabuleiro[linhaH][colunaH + i] = 3;
-    }
-
-    // 2. Navio Vertical na coluna 5
-    int linhaV = 4;
-    int colunaV = 5;
-    for (int i = 0; i < tamanho; i++) {
-        tabuleiro[linhaV + i][colunaV] = 3;
-    }
-
-    // 3. Navio Diagonal Principal (↘)
-    int linhaD1 = 0;
-    int colunaD1 = 0;
-    for (int i = 0; i < tamanho; i++) {
-        tabuleiro[linhaD1 + i][colunaD1 + i] = 3;
-    }
-
-    // 4. Navio Diagonal Secundária (↙)
-    int linhaD2 = 0;
-    int colunaD2 = 9;
-    for (int i = 0; i < tamanho; i++) {
-        tabuleiro[linhaD2 + i][colunaD2 - i] = 3;
-    }
-
-    // Exibir tabuleiro completo
-    printf("=== TABULEIRO 10x10 ===\n");
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            printf("%d ", tabuleiro[i][j]);
+void exibirMatriz(int matriz[5][5], int linhas, int colunas) {
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%d ", matriz[i][j]);
         }
         printf("\n");
     }
+}
+
+int main() {
+    // Matriz do Cone (5x5)
+    int cone[5][5] = {0};
+    for (int i = 0; i < 3; i++) {
+        for (int j = 2 - i; j <= 2 + i; j++) {
+            cone[i][j] = 1;
+        }
+    }
+
+    // Matriz da Cruz (5x5)
+    int cruz[5][5] = {0};
+    for (int i = 0; i < 5; i++) {
+        cruz[i][2] = 1; // coluna central
+        cruz[2][i] = 1; // linha central
+    }
+
+    // Matriz do Octaedro (5x5)
+    int octaedro[5][5] = {0};
+    for (int i = 0; i < 3; i++) {
+        octaedro[i][2] = 1;
+    }
+    octaedro[1][1] = 1;
+    octaedro[1][3] = 1;
+
+    // Exibir padrões
+    printf("=== Habilidade: CONE ===\n");
+    exibirMatriz(cone, 5, 5);
+
+    printf("\n=== Habilidade: CRUZ ===\n");
+    exibirMatriz(cruz, 5, 5);
+
+    printf("\n=== Habilidade: OCTAEDRO ===\n");
+    exibirMatriz(octaedro, 5, 5);
 
     return 0;
 }
